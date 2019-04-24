@@ -12,8 +12,8 @@ const defaultState = fromJS({
 
 export default (state=defaultState, action) => {
     switch (action.type) {
-        case actionTypes.GET_CITYS:
-            return state.set('citys', fromJS(action.payload.citys));
+        case actionTypes.CHANGE_CITYS:
+            return state.set('citys', action.payload.citys);
         case actionTypes.GET_TABLE_DATA: 
             return state.set('tableData', action.payload.tableData);
         case actionTypes.GET_CHART_DATA: 

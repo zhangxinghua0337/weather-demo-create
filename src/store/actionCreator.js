@@ -1,14 +1,13 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 import { fromJS } from 'immutable';
-import { from } from 'rxjs';
 
 
-export const getCitys = (value) => {
+export const changeCitys = (value) => {
     return {
-        type: actionTypes.GET_CITYS,
+        type: actionTypes.CHANGE_CITYS,
         payload: {
-            citys: value
+            citys: fromJS(value)
         }
     }
 }

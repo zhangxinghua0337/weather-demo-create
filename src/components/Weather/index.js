@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable no-script-url */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Select, Button, Table, Modal, Col } from 'antd';
+import { Select, Button, Table, Modal } from 'antd';
 import Chart from '../Charts2/MiniBar/index';
 import * as constant from '../../constant';
 import * as actionCreator from '../../store/actionCreator';
@@ -37,10 +39,10 @@ class Weather extends Component {
     }
     handleSearch = () => {  
         // 拿到citys发送请求
-        this.props.getTableData(actionCreator.getTableData(this.props.citys))
+        this.props.getTableData(actionCreator.getTableData(this.props.citys));
     }
     handleSelectChange = (value) => {
-        this.props.getCitys(actionCreator.getCitys(value));
+        this.props.changeCitys(actionCreator.changeCitys(value));
     }
     showModal = (text) => {
         this.props.changeModalVisible(actionCreator.changeModalVisible(true));
@@ -112,10 +114,13 @@ class Weather extends Component {
                     <Table dataSource={formatTableData(tableData)} columns={columns} />
                 </div>
                 <Modal
+                    width={960}
                     title={modalTitle}
                     visible={modalVisable}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
+                    okText="关闭"
+                    cancelText="取消"
                 >
                     <Table columns={constant.columns} dataSource={modalData} />
                 </Modal>
@@ -136,7 +141,7 @@ export default connect((state)=>({
     modalTitle: state.get('modalTitle'),
     modalData: state.get('modalData').toJS()
 }), (dispatch) => ({
-    getCitys(action){
+    changeCitys(action){
         dispatch(action);
     },
     getTableData(action) {
